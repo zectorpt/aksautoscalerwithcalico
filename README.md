@@ -73,6 +73,7 @@ az extension add -n aks-preview <br>
 az extension update -n aks-preview
 
 # Reconfigure a more agressive environment 
+## The main objective of this reconfiguration is to turn more efficient to Calico Solution
 az aks nodepool update --update-cluster-autoscaler --min-count 1 --max-count 10 -g $RESOURCE_GROUP_NAME -n nodepool1 --cluster-name $CLUSTER_NAME
 
 az aks update -g $RESOURCE_GROUP_NAME -n $CLUSTER_NAME --cluster-autoscaler-profile scale-down-delay-after-add=3m scale-down-unneeded-time=3m scale-down-unneeded-time=1m scale-down-unready-time=3m skip-nodes-with-system-pods=false skip-nodes-with-local-storage=false --min-count 1 --max-count 10
