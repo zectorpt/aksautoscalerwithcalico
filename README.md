@@ -69,7 +69,7 @@ az aks create \
 az aks get-credentials --resource-group $RESOURCE_GROUP_NAME --name $CLUSTER_NAME
 
 # Upgrade the aks extension
-az extension add -n aks-preview
+az extension add -n aks-preview <br>
 az extension update -n aks-preview
 
 # Reconfigure a more agressive environment 
