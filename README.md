@@ -37,10 +37,10 @@ SUBNET_ID=$(az network vnet subnet show --resource-group $RESOURCE_GROUP_NAME --
 
 az feature register --namespace "Microsoft.ContainerService" --name "EnableAKSWindowsCalico"
 
-#Check:
+# Check:
 az feature list -o table --query "[?contains(name, 'Microsoft.ContainerService/EnableAKSWindowsCalico')].{Name:name,State:properties.state}"
 
-#Refresh the registration:
+# Refresh the registration:
 az provider register --namespace Microsoft.ContainerService
 
 
