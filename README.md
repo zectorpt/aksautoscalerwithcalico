@@ -80,7 +80,7 @@ az aks update -g $RESOURCE_GROUP_NAME -n $CLUSTER_NAME --cluster-autoscaler-prof
 az aks update --resource-group $RESOURCE_GROUP_NAME --name $CLUSTER_NAME --cluster-autoscaler-profile ""
 kubectl scale deployment akstsdpl --replicas=500
 
-#Wait some minutes to allow the pods to be created
+# wait some minutes to allow the pods to be created
 kubectl scale deployment akstsdpl --replicas=1
 
 # Wait the scale down. It will take a couple of minutes
