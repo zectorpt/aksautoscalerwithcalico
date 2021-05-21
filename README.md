@@ -1,6 +1,4 @@
-# aksautoscalerwithcalico
-AKS autoscaler with calico and kubernetes version 1.20.5
-
+# AKS autoscaler with calico and kubernetes version 1.20.5
 
 RESOURCE_GROUP_NAME=calicotest
 CLUSTER_NAME=calicoscale
