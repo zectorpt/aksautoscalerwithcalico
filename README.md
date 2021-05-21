@@ -35,7 +35,7 @@ az role assignment create --assignee $SP_ID --scope $VNET_ID --role Contributor
 # Get the virtual network subnet resource ID
 SUBNET_ID=$(az network vnet subnet show --resource-group $RESOURCE_GROUP_NAME --vnet-name myVnet --name myAKSSubnet --query id -o tsv)
 
-#///////////////////// Create Cluster ///////////////////////
+# Create the Cluster
 
 az feature register --namespace "Microsoft.ContainerService" --name "EnableAKSWindowsCalico"
 
@@ -67,14 +67,14 @@ az aks create \
     --min-count 1 \
     --max-count 3
 	
-#///////////////////////////////////// Connect to the cluster ////////////////////////////////////
+# Connect to the cluster
 az aks get-credentials --resource-group $RESOURCE_GROUP_NAME --name $CLUSTER_NAME
 
-#/////////////// Upgrade the aks extension //////
+# Upgrade the aks extension
 az extension add -n aks-preview
 az extension update -n aks-preview
 
-#////// Reconfigure a more agressive environment /////
+# Reconfigure a more agressive environment 
 az aks nodepool update --update-cluster-autoscaler --min-count 1 --max-count 10 -g $RESOURCE_GROUP_NAME -n nodepool1 --cluster-name $CLUSTER_NAME
 
 az aks update -g $RESOURCE_GROUP_NAME -n $CLUSTER_NAME --cluster-autoscaler-profile scale-down-delay-after-add=3m scale-down-unneeded-time=3m scale-down-unneeded-time=1m scale-down-unready-time=3m skip-nodes-with-system-pods=false skip-nodes-with-local-storage=false --min-count 1 --max-count 10
@@ -85,5 +85,5 @@ kubectl scale deployment akstsdpl --replicas=500
 #Wait some minutes to allow the pods to be created
 kubectl scale deployment akstsdpl --replicas=1
 
-#///// Wait the scale down. It will take a couple of minutes//////////////////////
+# Wait the scale down. It will take a couple of minutes
 while true; do kubectl get pod -o wide|grep -i running|wc -l; sleep 5;kubectl get nodes -o wide; done
