@@ -78,10 +78,10 @@ az aks nodepool update --update-cluster-autoscaler --min-count 1 --max-count 10 
 
 az aks update -g $RESOURCE_GROUP_NAME -n $CLUSTER_NAME --cluster-autoscaler-profile scale-down-delay-after-add=3m scale-down-unneeded-time=3m scale-down-unneeded-time=1m scale-down-unready-time=3m skip-nodes-with-system-pods=false skip-nodes-with-local-storage=false --min-count 1 --max-count 10
 
-az aks update --resource-group $RESOURCE_GROUP_NAME --name $CLUSTER_NAME --cluster-autoscaler-profile ""
-kubectl scale deployment akstsdpl --replicas=500
+az aks update --resource-group $RESOURCE_GROUP_NAME --name $CLUSTER_NAME --cluster-autoscaler-profile "" <br>
 
-# wait some minutes to allow the pods to be created
+kubectl scale deployment akstsdpl --replicas=500
+### wait some minutes to allow the pods to be created
 kubectl scale deployment akstsdpl --replicas=1
 
 # Wait the scale down. It will take a couple of minutes
