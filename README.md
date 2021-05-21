@@ -80,8 +80,12 @@ az aks update -g $RESOURCE_GROUP_NAME -n $CLUSTER_NAME --cluster-autoscaler-prof
 
 az aks update --resource-group $RESOURCE_GROUP_NAME --name $CLUSTER_NAME --cluster-autoscaler-profile "" <br>
 
+### Lets increase the number of replicas to make sure that the nodes will increase, just a matter of wait
 kubectl scale deployment akstsdpl --replicas=500
-### wait some minutes to allow the pods to be created
+### Now we can validate the number of active nodes and pods
+kubectl get pod -o wide <br>
+kubectl get nodes -o wide <br>
+### Now lets set the number of replicas again to 1 and wait until scale down
 kubectl scale deployment akstsdpl --replicas=1
 
 # Wait the scale down. It will take a couple of minutes
